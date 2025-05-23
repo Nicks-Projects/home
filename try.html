@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wallpaper Creator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: 'Fredoka One', cursive;
+      background: linear-gradient(135deg, #f0e6f6, #d6e8f0);
+      overflow: auto;
+    }
+    body {
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+      width: 100vw;
+      box-sizing: border-box;
+    }
+    .left-panel {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+      background: #f9f9f9;
+      border-right: 2px solid #ccc;
+      min-height: 100vh;
+      padding-top: 60px;
+      box-sizing: border-box;
+    }
+    .canvas {
+      width: 300px;
+      height: 200px;
+      background: #ddd;
+      border: 2px dashed #aaa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #666;
+      font-size: 1.2rem;
+      user-select: none;
+      transition: width 0.6s cubic-bezier(.68,-0.55,.27,1.55), height 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+      box-shadow: 0 4px 24px #a67acc22;
+      border-radius: 18px;
+      animation: canvasPop 1s;
+      margin-bottom: 40px;
+      background-clip: padding-box;
+      background-color: #f8f8ffcc;
+      position: relative;
+    }
+    @keyframes canvasPop {
+      0% { transform: scale(0.7) rotate(-6deg); opacity: 0; }
+      80% { transform: scale(1.08) rotate(4deg);}
+      100% { transform: scale(1) rotate(0); opacity: 1; }
+    }
+    .right-panel {
+      width: 340px;
+      background: rgba(255, 255, 255, 0.7);
+      margin: 32px 0 32px 0;
+      border-radius: 20px 0 0 20px;
+      padding: 24px 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.07);
+      justify-content: flex-start;
+      align-items: stretch;
+      min-width: 250px;
+      max-width: 95vw;
+      min-height: 80vh;
+      position: sticky;
+      top: 32px;
+      right: 0;
+    }
+    button {
+      padding: 16px 0;
+      font-size: 1.15rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(90deg, #a67acc 70%, #f4c32b 100%);
+      color: white;
+      font-weight: 700;
+      margin-bottom: 6px;
+      box-shadow: 0 2px 8px #a67acc33;
+      transition: background 0.3s, transform 0.2s;
+      letter-spacing: 1px;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #7a4dbb 0%, #f4c32b 100%);
+      transform: scale(1.06) rotate(-2deg);
+    }
+    .slider-container {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+      animation: fadeIn .4s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    label {
+      font-weight: 600;
+      color: #423e3d;
+      margin-bottom: 2px;
+    }
+    input[type=range] {
+      width: 100%;
+      accent-color: #a67acc;
+    }
+    @media (max-width: 900px) {
+      .right-panel { width: 100vw; min-width: unset; margin: 0; border-radius: 0; }
+      .left-panel { border-right: none;}
+    }
+    @media (max-width: 700px) {
+      html, body { flex-direction: column; }
+      .right-panel { width: 100vw; border-radius: 0 0 20px 20px; }
+      .left-panel { width: 100vw; }
+      .canvas { width: 90vw !important; max-width: 98vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="left-panel">
+    <div class="canvas" id="canvas">No Frame Chosen</div>
+  </div>
+  <div class="right-panel">
+    <button id="mobileBtn">Mobile Frame</button>
+    <button id="computerBtn">Computer Frame</button>
+    <button id="customBtn">Custom</button>
+    <div class="slider-container" id="sliderContainer">
+      <label for="widthRange">Width: <span id="widthValue">300</span> px</label>
+      <input type="range" id="widthRange" min="100" max="1920" value="300">
+      <label for="heightRange">Height: <span id="heightValue">200</span> px</label>
+      <input type="range" id="heightRange" min="100" max="1080" value="200">
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('canvas');
+      const mobileBtn = document.getElementById('mobileBtn');
+      const computerBtn = document.getElementById('computerBtn');
+      const customBtn = document.getElementById('customBtn');
+      const sliderContainer = document.getElementById('sliderContainer');
+      const widthRange = document.getElementById('widthRange');
+      const heightRange = document.getElementById('heightRange');
+      const widthValue = document.getElementById('widthValue');
+      const heightValue = document.getElementById('heightValue');
+
+      function animateResize(width, height) {
+        canvas.style.transition = 'width 0.8s cubic-bezier(.68,-0.55,.27,1.55), height 0.8s cubic-bezier(.68,-0.55,.27,1.55)';
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        canvas.textContent = width + ' x ' + height;
+      }
+
+      mobileBtn.addEventListener('click', () => {
+        sliderContainer.style.display = 'none';
+        animateResize(375, 667); // typical mobile wallpaper size
+      });
+
+      computerBtn.addEventListener('click', () => {
+        sliderContainer.style.display = 'none';
+        animateResize(1920, 1080); // typical computer wallpaper size
+      });
+
+      customBtn.addEventListener('click', () => {
+        sliderContainer.style.display = 'flex';
+        // Set initial slider values to current canvas size
+        widthRange.value = parseInt(canvas.style.width) || 300;
+        heightRange.value = parseInt(canvas.style.height) || 200;
+        widthValue.textContent = widthRange.value;
+        heightValue.textContent = heightRange.value;
+      });
+
+      widthRange.addEventListener('input', () => {
+        widthValue.textContent = widthRange.value;
+        canvas.style.width = widthRange.value + 'px';
+        canvas.textContent = widthRange.value + ' x ' + heightRange.value;
+      });
+
+      heightRange.addEventListener('input', () => {
+        heightValue.textContent = heightRange.value;
+        canvas.style.height = heightRange.value + 'px';
+        canvas.textContent = widthRange.value + ' x ' + heightRange.value;
+      });
+    });
+  </script>
+</body>
+</html>
