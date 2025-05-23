@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tyler Background Creator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Fredoka One', cursive;
+      background: linear-gradient(120deg, #f4c32b 0%, #f1f2e5 60%, #eea4bb 100%);
+      color: #423e3d;
+      position: relative;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #fffbeea0;
+      border-radius: 30px;
+      box-shadow: 0 8px 40px #f4c32b44;
+      padding: 60px 40px 50px 40px;
+      text-align: center;
+      position: relative;
+      overflow: visible;
+      animation: popIn 1s cubic-bezier(.66,-0.01,.32,1.01);
+      z-index: 10;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.7) rotate(-8deg); opacity: 0; }
+      80% { transform: scale(1.08) rotate(4deg);}
+      100% { transform: scale(1) rotate(0); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 3rem;
+      letter-spacing: 2px;
+      color: #dd3207;
+      text-shadow: 2px 2px 0 #f4c32b, 0 0 12px #eea4bb66;
+      margin-bottom: 32px;
+      animation: bounceIn 1.2s 0.2s both;
+    }
+    @keyframes bounceIn {
+      0% { transform: translateY(-80px) scale(0.7); opacity: 0; }
+      70% { transform: translateY(12px) scale(1.1);}
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .try-btn {
+      margin-top: 30px;
+      font-size: 2rem;
+      padding: 18px 60px;
+      border-radius: 40px;
+      border: none;
+      background: linear-gradient(90deg, #f4c32b 60%, #eea4bb 100%);
+      color: #fff;
+      font-family: 'Fredoka One', cursive;
+      font-weight: 900;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 20px #f4c32b44;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: btnPop 1.3s 0.5s both;
+    }
+    .try-btn:hover {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 8px 24px #eea4bb77;
+      background: linear-gradient(90deg, #eea4bb 0%, #f4c32b 100%);
+      color: #dd3207;
+    }
+    @keyframes btnPop {
+      0% { transform: scale(0.5); opacity: 0;}
+      80% { transform: scale(1.15);}
+      100% { transform: scale(1); opacity: 1;}
+    }
+
+    /* Fun shapes and sunflowers */
+    .bg-obj, .sunflower, .cassette, .vinyl, .bee {
+      position: absolute;
+      opacity: 0.85;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .circle {
+      border-radius: 50%;
+      border: 4px solid #f4c32b;
+      animation: wobble 4s infinite;
+    }
+    .circle1 { width: 80px; height: 80px; left: -40px; top: 60px; background: #eea4bb;}
+    .circle2 { width: 60px; height: 60px; left: 90vw; top: 20vh; background: #f1f2e5; animation-delay: 1s;}
+    .circle3 { width: 40px; height: 40px; left: 70vw; top: 80vh; background: #f4c32b; animation-delay: 2s;}
+    .circle4 { width: 70px; height: 70px; left: 20vw; top: 80vh; background: #eea4bb; animation-delay: 1.5s;}
+    .circle5 { width: 50px; height: 50px; left: 80vw; top: 10vh; background: #f4c32b; animation-delay: 2.5s;}
+
+    .triangle {
+      width: 0; height: 0;
+      border-left: 32px solid transparent;
+      border-right: 32px solid transparent;
+      border-bottom: 64px solid #f4c32b;
+      animation: rotate 6s linear infinite;
+    }
+    .triangle1 { left: 90vw; top: 20px;}
+    .triangle2 { left: 10vw; top: 80vh; border-bottom-color: #eea4bb; animation-delay: 2s;}
+    .triangle3 { left: 40vw; top: 10vh; border-bottom-color: #f1f2e5; animation-delay: 1s;}
+    .triangle4 { left: 85vw; top: 70vh; border-bottom-color: #dd3207; animation-delay: 1.5s;}
+
+    /* Cassette tape */
+    .cassette {
+      width: 70px;
+      height: 42px;
+      background: linear-gradient(120deg, #f4c32b 60%, #eea4bb 100%);
+      border: 3px solid #423e3d;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px #f4c32b55;
+      z-index: 2;
+      animation: floatCassette 7s infinite;
+    }
+    .cassette1 { left: 15vw; top: 12vh; animation-delay: 0s;}
+    .cassette2 { left: 80vw; top: 60vh; animation-delay: 2s;}
+    .cassette3 { left: 60vw; top: 30vh; animation-delay: 4s;}
+    .cassette::after {
+      content: '';
+      position: absolute;
+      left: 18px; top: 12px;
+      width: 12px; height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 22px 0 #fff;
+    }
+    @keyframes floatCassette {
+      0%,100% { transform: translateY(0) rotate(-8deg);}
+      50% { transform: translateY(-18px) rotate(8deg);}
+    }
+
+    /* Vinyl record */
+    .vinyl {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 60% 40%, #19151e 70%, #f4c32b 85%, #19151e 100%);
+      border: 4px solid #423e3d;
+      box-shadow: 0 2px 10px #423e3d22;
+      animation: spinVinyl 8s linear infinite;
+    }
+    .vinyl1 { left: 30vw; top: 15vh;}
+    .vinyl2 { left: 65vw; top: 75vh;}
+    .vinyl3 { left: 55vw; top: 55vh;}
+    @keyframes spinVinyl {
+      0% { transform: rotate(0);}
+      100% { transform: rotate(360deg);}
+    }
+
+    /* Bee PNG */
+    .bee {
+      width: 52px;
+      height: 52px;
+      z-index: 3;
+      animation: beeFly 6s infinite cubic-bezier(.5,.1,.5,1);
+    }
+    .bee1 { left: 20vw; top: 40vh; animation-delay: 0s;}
+    .bee2 { left: 75vw; top: 25vh; animation-delay: 2s;}
+    .bee3 { left: 60vw; top: 70vh; animation-delay: 1s;}
+    .bee img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 2px #423e3d44);
+      animation: beeWiggle 1.2s infinite;
+    }
+    @keyframes beeFly {
+      0%,100% { transform: translateY(0);}
+      20% { transform: translateY(-10px);}
+      40% { transform: translateY(8px);}
+      60% { transform: translateY(-8px);}
+      80% { transform: translateY(10px);}
+    }
+    @keyframes beeWiggle {
+      0%,100% { transform: rotate(-7deg);}
+      50% { transform: rotate(7deg);}
+    }
+
+    /* Flowers and sunflowers (same as before) */
+    .flower {
+      width: 70px; height: 70px;
+      animation: flowerbounce 5s infinite;
+    }
+    .flower1 { left: 85vw; top: 85vh;}
+    .flower2 { left: 10vw; top: 10vh; animation-delay: 2s;}
+    .flower3 { left: 40vw; top: 80vh; animation-delay: 1s;}
+    .flower .petal {
+      position: absolute;
+      width: 24px;
+      height: 36px;
+      background: #eea4bb;
+      border-radius: 50%;
+    }
+    .flower .p1 { left: 23px; top: 0; }
+    .flower .p2 { left: 45px; top: 15px; transform: rotate(60deg);}
+    .flower .p3 { left: 38px; top: 38px; transform: rotate(120deg);}
+    .flower .p4 { left: 8px; top: 38px; transform: rotate(180deg);}
+    .flower .p5 { left: 0px; top: 15px; transform: rotate(240deg);}
+    .flower .center {
+      position: absolute;
+      left: 21px; top: 21px;
+      width: 28px; height: 28px;
+      background: #f4c32b;
+      border-radius: 50%;
+      border: 3px solid #423e3d;
+    }
+    .sunflower {
+      width: 54px;
+      height: 80px;
+      animation: sway 5s infinite;
+    }
+    .sf1 { left: 5vw; bottom: -30px;}
+    .sf2 { left: 18vw; bottom: -30px; animation-delay: 0.5s;}
+    .sf3 { left: 32vw; bottom: -30px; animation-delay: 1s;}
+    .sf4 { left: 53vw; bottom: -30px; animation-delay: 1.5s;}
+    .sf5 { left: 67vw; bottom: -30px; animation-delay: 2s;}
+    .sf6 { left: 82vw; bottom: -30px; animation-delay: 2.5s;}
+    .sunflower .center {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      width: 24px;
+      height: 24px;
+      background: #7a5426;
+      border-radius: 50%;
+      z-index: 2;
+    }
+    .sunflower .petal {
+      position: absolute;
+      width: 12px;
+      height: 24px;
+      background: #f4c32b;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      z-index: 1;
+    }
+    .sunflower .petal.p1 { left: 13px; top: 0; transform: rotate(0deg);}
+    .sunflower .petal.p2 { left: 25px; top: 0; transform: rotate(25deg);}
+    .sunflower .petal.p3 { left: 36px; top: 7px; transform: rotate(55deg);}
+    .sunflower .petal.p4 { left: 40px; top: 22px; transform: rotate(85deg);}
+    .sunflower .petal.p5 { left: 31px; top: 38px; transform: rotate(115deg);}
+    .sunflower .petal.p6 { left: 15px; top: 46px; transform: rotate(145deg);}
+    .sunflower .petal.p7 { left: 2px; top: 38px; transform: rotate(175deg);}
+    .sunflower .petal.p8 { left: 0px; top: 20px; transform: rotate(205deg);}
+    @keyframes wobble {
+      0%,100% { transform: rotate(-8deg);}
+      50% { transform: rotate(8deg);}
+    }
+    @keyframes rotate {
+      0% { transform: rotate(0);}
+      100% { transform: rotate(360deg);}
+    }
+    @keyframes flowerbounce {
+      0%,100% { transform: translateY(0);}
+      50% { transform: translateY(-18px);}
+    }
+    @keyframes sway {
+      0%,100% { transform: rotate(-4deg);}
+      50% { transform: rotate(4deg);}
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container { padding: 30px 10px; }
+      h1 { font-size: 2rem; }
+      .try-btn { font-size: 1.2rem; padding: 12px 30px; }
+      .bg-obj, .sunflower, .cassette, .vinyl, .bee { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated background objects -->
+  <div class="bg-obj circle circle1"></div>
+  <div class="bg-obj circle circle2"></div>
+  <div class="bg-obj circle circle3"></div>
+  <div class="bg-obj circle circle4"></div>
+  <div class="bg-obj circle circle5"></div>
+  <div class="bg-obj triangle triangle1"></div>
+  <div class="bg-obj triangle triangle2"></div>
+  <div class="bg-obj triangle triangle3"></div>
+  <div class="bg-obj triangle triangle4"></div>
+  <div class="cassette cassette1"></div>
+  <div class="cassette cassette2"></div>
+  <div class="cassette cassette3"></div>
+  <div class="vinyl vinyl1"></div>
+  <div class="vinyl vinyl2"></div>
+  <div class="vinyl vinyl3"></div>
+  <div class="bee bee1"><img src="https://www.pngkey.com/png/full/169-1696166_report-abuse-flower-boy-tyler-the-creator.png" alt="Flower Boy Bee"></div>
+  <div class="bee bee2"><img src="https://www.pngkey.com/png/full/169-1696166_report-abuse-flower-boy-tyler-the-creator.png" alt="Flower Boy Bee"></div>
+  <div class="bee bee3"><img src="https://www.pngkey.com/png/full/169-1696166_report-abuse-flower-boy-tyler-the-creator.png" alt="Flower Boy Bee"></div>
+  <div class="flower bg-obj flower1">
+    <div class="petal p1"></div>
+    <div class="petal p2"></div>
+    <div class="petal p3"></div>
+    <div class="petal p4"></div>
+    <div class="petal p5"></div>
+    <div class="center"></div>
+  </div>
+  <div class="flower bg-obj flower2">
+    <div class="petal p1"></div>
+    <div class="petal p2"></div>
+    <div class="petal p3"></div>
+    <div class="petal p4"></div>
+    <div class="petal p5"></div>
+    <div class="center"></div>
+  </div>
+  <div class="flower bg-obj flower3">
+    <div class="petal p1"></div>
+    <div class="petal p2"></div>
+    <div class="petal p3"></div>
+    <div class="petal p4"></div>
+    <div class="petal p5"></div>
+    <div class="center"></div>
+  </div>
+  <div class="sunflower sf1">
+    <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div>
+    <div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div>
+    <div class="petal p7"></div><div class="petal p8"></div>
+    <div class="center"></div>
+  </div>
+  <div class="sunflower sf2">
+    <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div>
+    <div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div>
+    <div class="petal p7"></div><div class="petal p8"></div>
+    <div class="center"></div>
+  </div>
+  <div class="sunflower sf3">
+    <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div>
+    <div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div>
+    <div class="petal p7"></div><div class="petal p8"></div>
+    <div class="center"></div>
+  </div>
+  <div class="sunflower sf4">
+    <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div>
+    <div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div>
+    <div class="petal p7"></div><div class="petal p8"></div>
+    <div class="center"></div>
+  </div>
+  <div class="sunflower sf5">
+    <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div>
+    <div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div>
+    <div class="petal p7"></div><div class="petal p8"></div>
+    <div class="center"></div>
+  </div>
+  <div class="sunflower sf6">
+    <div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div>
+    <div class="petal p4"></div><div class="petal p5"></div><div class="petal p6"></div>
+    <div class="petal p7"></div><div class="petal p8"></div>
+    <div class="center"></div>
+  </div>
+
+  <div class="container">
+    <h1>Tyler Background Creator</h1>
+    <button class="try-btn" onclick="window.location.href='try.html'">Try</button>
+  </div>
+</body>
+</html>
